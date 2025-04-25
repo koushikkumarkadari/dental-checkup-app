@@ -25,7 +25,7 @@ const Appointments = () => {
           ? `/api/appointments/doctor/${user._id}`
           : `/api/appointments/patient/${user._id}`;
 
-        const response = await axios.get(`http://localhost:5000${endpoint}`, {
+        const response = await axios.get(`https://dental-checkup-app.onrender.com${endpoint}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
