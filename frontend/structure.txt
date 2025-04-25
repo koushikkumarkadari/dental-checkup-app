@@ -1,0 +1,47 @@
+dental-checkup-app/
+├── backend/
+│   ├── config/
+│   │   └── db.js                # MongoDB connection logic
+│   ├── controllers/
+│   │   ├── userController.js    # Handles user logic
+│   │   ├── dentistController.js # Handles dentist logic
+│   │   └── checkupController.js # Handles checkup creation, results, image upload
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Dentist.js
+│   │   └── Checkup.js
+│   ├── routes/
+│   │   ├── userRoutes.js
+│   │   ├── dentistRoutes.js
+│   │   └── checkupRoutes.js
+│   ├── uploads/                 # Stores uploaded images
+│   ├── .env                     # Environment variables (DB URL, PORT, etc.)
+│   ├── app.js                   # Express app config
+│   └── server.js                # Starts the server
+
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/              # Static assets (images, icons)
+│   │   ├── components/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── DentistList.jsx
+│   │   │   ├── CheckupForm.jsx
+│   │   │   ├── CheckupResult.jsx
+│   │   │   ├── UploadImages.jsx
+│   │   ├── pages/
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx        # Optional
+│   │   │   ├── Register.jsx     # Optional
+│   │   │   ├── Dashboard.jsx
+│   │   ├── services/
+│   │   │   └── api.js           # Axios API instance
+│   │   ├── App.jsx
+│   │   ├── index.css            # Tailwind directives
+│   │   └── main.jsx
+│   ├── tailwind.config.js
+│   └── postcss.config.js
+
+├── .gitignore
+├── package.json                # Root package.json (if needed)
+└── README.md
