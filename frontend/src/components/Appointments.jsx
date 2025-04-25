@@ -50,7 +50,7 @@ const Appointments = () => {
 
       try {
         await axios.post(
-          `http://localhost:5000/api/appointments/${appointmentId}/results`,
+          `https://dental-checkup-app.onrender.com/api/appointments/${appointmentId}/results`,
           { description },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -65,7 +65,7 @@ const Appointments = () => {
       // Patient: Fetch checkup results
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/appointments/${appointmentId}/results`,
+          `https://dental-checkup-app.onrender.com/api/appointments/${appointmentId}/results`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

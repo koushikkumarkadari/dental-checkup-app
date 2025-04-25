@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const { data } = await axios.post('http://localhost:5000/api/users/login', { email, password });
+      const { data } = await axios.post('https://dental-checkup-app.onrender.com/api/users/login', { email, password });
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data));
       setToken(data.token); // Fix: Use data.token
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (formData) => {
     try {
-      const { data } = await axios.post('http://localhost:5000/api/users/register', formData);
+      const { data } = await axios.post('https://dental-checkup-app.onrender.com/api/users/register', formData);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data));
       setToken(data.token);

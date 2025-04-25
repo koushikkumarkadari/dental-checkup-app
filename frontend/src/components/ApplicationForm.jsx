@@ -35,7 +35,7 @@ const ApplicationForm = () => {
 
     try {
       await axios.post(
-        'http://localhost:5000/api/appointments',
+        'https://dental-checkup-app.onrender.com/api/appointments',
         {
           ...form,
           doctorId: doctor._id,

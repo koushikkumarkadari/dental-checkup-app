@@ -17,7 +17,7 @@ const DentistList = () => {
 
     const fetchDentists = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/dentists', {
+        const res = await axios.get('https://dental-checkup-app.onrender.com/api/dentists', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setDentists(res.data);
