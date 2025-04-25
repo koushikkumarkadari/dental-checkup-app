@@ -49,14 +49,15 @@ const Dentist = mongoose.model('Dentist', dentistSchema);
 
 // Appointment Schema
 const appointmentSchema = new mongoose.Schema({
-  patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Add patientId
-  patientName: String,
-  patientEmail: String,
+  patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  patientName: { type: String, required: true },
+  patientEmail: { type: String, required: true },
   doctorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Dentist', required: true },
-  doctorName: String,
-  date: String,
-  time: String,
-  message: String,
+  doctorName: { type: String, required: true },
+  date: { type: String, required: true },
+  time: { type: String, required: true },
+  message: { type: String },
+  description: { type: String }, // New field for storing results or descriptions
 });
 
 const Appointment = mongoose.model('Appointment', appointmentSchema);
@@ -232,6 +233,21 @@ app.get('/api/appointments/patient/:patientId', patientMiddleware, async (req, r
       return res.status(403).json({ message: 'Access denied: You can only view your own appointments' });
     }
     res.json(appointments);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+app.get('/api/appointments/:appointmentId/results', patientMiddleware, async (req, res) => {
+  const { appointmentId } = req.params;
+
+  try {
+    const appointment = await Appointment.findById(appointmentId);
+    if (!appointment) {
+      return res.status(404).json({ message: 'Appointment not found' });
+    }
+
+    res.status(200).json({ description: appointment.description || 'No results available yet.' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

@@ -42,6 +42,42 @@ const Appointments = () => {
     fetchAppointments();
   }, [user, token, isDoctor, navigate]);
 
+  const handleShowResults = async (appointmentId) => {
+    if (isDoctor) {
+      // Doctor: Upload descriptions
+      const description = prompt('Enter the description for this appointment:');
+      if (!description) return;
+
+      try {
+        await axios.post(
+          `http://localhost:5000/api/appointments/${appointmentId}/results`,
+          { description },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        alert('Description uploaded successfully!');
+      } catch (err) {
+        console.error('Error uploading description:', err);
+        alert('Failed to upload description.');
+      }
+    } else {
+      // Patient: Fetch checkup results
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/appointments/${appointmentId}/results`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        alert(`Checkup Results: ${response.data.description}`);
+      } catch (err) {
+        console.error('Error fetching results:', err);
+        alert('Failed to fetch checkup results.');
+      }
+    }
+  };
+
   if (loading) {
     return <div className="p-6 text-center">Loading appointments...</div>;
   }
@@ -91,6 +127,15 @@ const Appointments = () => {
               <p>
                 <strong>Message:</strong> {appointment.message || 'N/A'}
               </p>
+              <p>
+                <strong>Result:</strong> {appointment.description || 'N/A'}
+              </p>
+              <button
+                onClick={() => handleShowResults(appointment._id)}
+                className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+              >
+                Show Results
+              </button>
             </li>
           ))}
         </ul>
